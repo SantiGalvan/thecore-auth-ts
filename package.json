@@ -1,7 +1,7 @@
 {
   "name": "thecore-auth-ts",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "main": "dist/thecore-auth-ts.cjs.js",
   "style": "dist/thecore-auth-ts.css",
