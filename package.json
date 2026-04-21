@@ -1,0 +1,92 @@
+{
+  "name": "thecore-auth-ts",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/thecore-auth-ts.cjs.js",
+  "style": "dist/thecore-auth-ts.css",
+  "module": "dist/thecore-auth-ts.esm.js",
+  "bin": {
+    "setup-deploy": "./deploy-scripts/setupDeploy.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/thecore-auth-ts.esm.js",
+      "require": "./dist/thecore-auth-ts.cjs.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "increment-version": "npm version patch && git push",
+    "setup-deploy": "node ./deploy-scripts/setupDeploy.js"
+  },
+  "types": "dist/index.d.ts",
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.12",
+    "axios": "^1.7.9",
+    "date-holidays": "^3.26.11",
+    "jwt-decode": "^3.1.2",
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.3",
+    "sileo": "^0.1.4",
+    "ua-parser-js": "^2.0.9"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.7.9",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "jwt-decode": "^3.1.2",
+    "postcss": "^8.5.1",
+    "react-icons": "^5.4.0",
+    "react-router-dom": "^7.1.3",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.0",
+    "vite": "^6.0.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-svgr": "^4.3.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CSS variables documentation.md",
+    "!dist/config.json",
+    "deploy-scripts",
+    "deploy-scripts/templates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SantiGalvan/thecore-auth-ts"
+  },
+  "keywords": [
+    "react",
+    "authentication",
+    "jwt",
+    "react-router",
+    "typescript",
+    "tailwindcss",
+    "permissions",
+    "roles",
+    "theme-management",
+    "css-variables"
+  ],
+  "author": "Santiago Galvan<santiagogalvancolorado@gmail.com>",
+  "license": "MIT",
+  "description": "Un pacchetto per l'autenticazione in React utilizzando JWT nell'accezione implementata in thecore e React Router e con un sistema di gestione dei permessi basato su ruoli e permessi personalizzati. Usando Tailwind CSS per lo stile e con un sistema di gestione dei temi basato su CSS variables. Con Typescript per una migliore esperienza di sviluppo e con un sistema di gestione dei permessi flessibile e personalizzabile."
+}

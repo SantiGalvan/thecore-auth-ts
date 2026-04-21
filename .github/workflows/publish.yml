@@ -1,0 +1,38 @@
+name: Build and Publish to npm
+
+on:
+  push:
+    branches:
+      - main # Si attiva su push alla branch principale
+    paths:
+      - 'package.json' # Il workflow parte solo se cambia il package.json
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest # Usa una macchina virtuale Ubuntu per il job
+
+    steps:
+      # Checkout del codice dal repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Imposta Node.js (specifica la versione da usare)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22" # Versione di Node.js utilizzata
+          registry-url: https://registry.npmjs.org/ # Registry npm ufficiale
+
+      # Installa le dipendenze (produzione + sviluppo)
+      - name: Install dependencies
+        run: npm install
+
+      # Esegue la build del pacchetto
+      - name: Build the package
+        run: npm run build # Assicurati che esista lo script "build" nel package.json
+
+      # Pubblica il pacchetto su npm usando il token con bypass 2FA
+      - name: Publish to npm
+        run: npm publish --access public # Usa --access public per pacchetti pubblici
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Token npm salvato nei GitHub Secrets

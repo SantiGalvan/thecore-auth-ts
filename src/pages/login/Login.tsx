@@ -1,0 +1,47 @@
+import { useEffect, ComponentType, SVGProps } from "react";
+import LoginForm from "../../components/form/LoginForm";
+import { useLoginForm } from "../../contexts/login/LoginFormContext";
+import { useConfig } from "../../contexts/config/ConfigContext";
+import { useNavigate } from "react-router-dom";
+import { useAuthStorage } from "../../hooks/auth/useAuthStorage";
+import { useViewportHeight } from "../../hooks/viewport/useViewportHeight";
+
+interface LoginProps {
+    Logo?: ComponentType<SVGProps<SVGSVGElement>>;
+}
+
+const Login = ({ Logo }: LoginProps) => {
+    const { styleCardForm, styleContainerLogo, styleLogo, overrideStyle, customVersion } = useLoginForm();
+    const { firstPrivatePath, version } = useConfig();
+    const { token, user } = useAuthStorage();
+    useViewportHeight();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token && user?.id) navigate(`${firstPrivatePath}${user.id}`);
+    }, []);
+
+    return (
+        <section id="login-page">
+            {(version || customVersion) && (
+                <div
+                    style={{ top: `calc(1rem + env(safe-area-inset-top))`, left: `calc(1rem + env(safe-area-inset-left))` }}
+                    className="text-md text-primary absolute"
+                >
+                    {customVersion ? customVersion : version}
+                </div>
+            )}
+            <div className={overrideStyle.container || `container mx-auto flex items-center justify-center min-h-screen`}>
+                <div className={overrideStyle.cardForm || `bg-form card-style card-size flex flex-col sm:flex-row sm:items-center justify-center ${styleCardForm}`}>
+                    <div className={overrideStyle.containerLogo || `login-logo-container basis-1/2 flex items-center justify-center ${styleContainerLogo}`}>
+                        {Logo && <Logo className={overrideStyle.logo || `login-logo ${styleLogo}`} />}
+                    </div>
+                    <LoginForm />
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Login;
